@@ -1,5 +1,5 @@
 {
-  "name": "pusher-js",
+  "name": "@ambassador/pusher-js",
   "version": "3.2.4",
   "description": "Pusher JavaScript library for browser, React Native, NodeJS and web workers",
   "main": "dist/web/pusher.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/pusher/pusher-js.git"
+    "url": "https://github.com/GetAmbassador/pusher-js.git"
   },
   "keywords": [
     "pusher",
@@ -23,9 +23,9 @@
   "author": "Pusher",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/pusher/pusher-js"
+    "url": "https://github.com/GetAmbassador/pusher-js"
   },
-  "homepage": "https://github.com/pusher/pusher-js",
+  "homepage": "https://github.com/GetAmbassador/pusher-js",
   "devDependencies": {
     "es3ify-loader": "^0.2.0",
     "fetch-mock": "git+https://git@github.com/jpatel531/fetch-mock.git",

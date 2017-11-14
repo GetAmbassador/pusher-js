@@ -1,8 +1,8 @@
 /*!
- * Pusher JavaScript Library v3.2.4
+ * MbsyPusher JavaScript Library v3.2.4
  * http://pusher.com/
  *
- * Copyright 2016, Pusher
+ * Copyright 2016, MbsyPusher
  * Released under the MIT licence.
  */
 
@@ -12,9 +12,9 @@
 	else if(typeof define === 'function' && define.amd)
 		define([], factory);
 	else if(typeof exports === 'object')
-		exports["Pusher"] = factory();
+		exports["MbsyPusher"] = factory();
 	else
-		root["Pusher"] = factory();
+		root["MbsyPusher"] = factory();
 })(this, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -83,8 +83,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	var DefaultConfig = __webpack_require__(62);
 	var logger_1 = __webpack_require__(8);
 	var factory_1 = __webpack_require__(42);
-	var Pusher = (function () {
-	    function Pusher(app_key, options) {
+	var MbsyPusher = (function () {
+	    function MbsyPusher(app_key, options) {
 	        var _this = this;
 	        checkAppKey(app_key);
 	        options = options || {};
@@ -95,7 +95,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.sessionID = Math.floor(Math.random() * 1000000000);
 	        this.timeline = new timeline_1["default"](this.key, this.sessionID, {
 	            cluster: this.config.cluster,
-	            features: Pusher.getClientFeatures(),
+	            features: MbsyPusher.getClientFeatures(),
 	            params: this.config.timelineParams || {},
 	            limit: 50,
 	            level: level_1["default"].INFO,
@@ -144,33 +144,33 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.connection.bind('error', function (err) {
 	            logger_1["default"].warn('Error', err);
 	        });
-	        Pusher.instances.push(this);
-	        this.timeline.info({ instances: Pusher.instances.length });
-	        if (Pusher.isReady) {
+	        MbsyPusher.instances.push(this);
+	        this.timeline.info({ instances: MbsyPusher.instances.length });
+	        if (MbsyPusher.isReady) {
 	            this.connect();
 	        }
 	    }
-	    Pusher.ready = function () {
-	        Pusher.isReady = true;
-	        for (var i = 0, l = Pusher.instances.length; i < l; i++) {
-	            Pusher.instances[i].connect();
+	    MbsyPusher.ready = function () {
+	        MbsyPusher.isReady = true;
+	        for (var i = 0, l = MbsyPusher.instances.length; i < l; i++) {
+	            MbsyPusher.instances[i].connect();
 	        }
 	    };
-	    Pusher.log = function (message) {
-	        if (Pusher.logToConsole && (window).console && (window).console.log) {
+	    MbsyPusher.log = function (message) {
+	        if (MbsyPusher.logToConsole && (window).console && (window).console.log) {
 	            (window).console.log(message);
 	        }
 	    };
-	    Pusher.getClientFeatures = function () {
+	    MbsyPusher.getClientFeatures = function () {
 	        return Collections.keys(Collections.filterObject({ "ws": runtime_1["default"].Transports.ws }, function (t) { return t.isSupported({}); }));
 	    };
-	    Pusher.prototype.channel = function (name) {
+	    MbsyPusher.prototype.channel = function (name) {
 	        return this.channels.find(name);
 	    };
-	    Pusher.prototype.allChannels = function () {
+	    MbsyPusher.prototype.allChannels = function () {
 	        return this.channels.all();
 	    };
-	    Pusher.prototype.connect = function () {
+	    MbsyPusher.prototype.connect = function () {
 	        this.connection.connect();
 	        if (this.timelineSender) {
 	            if (!this.timelineSenderTimer) {
@@ -182,26 +182,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	        }
 	    };
-	    Pusher.prototype.disconnect = function () {
+	    MbsyPusher.prototype.disconnect = function () {
 	        this.connection.disconnect();
 	        if (this.timelineSenderTimer) {
 	            this.timelineSenderTimer.ensureAborted();
 	            this.timelineSenderTimer = null;
 	        }
 	    };
-	    Pusher.prototype.bind = function (event_name, callback) {
+	    MbsyPusher.prototype.bind = function (event_name, callback) {
 	        this.global_emitter.bind(event_name, callback);
 	        return this;
 	    };
-	    Pusher.prototype.unbind = function (event_name, callback) {
+	    MbsyPusher.prototype.unbind = function (event_name, callback) {
 	        this.global_emitter.unbind(event_name, callback);
 	        return this;
 	    };
-	    Pusher.prototype.bind_all = function (callback) {
+	    MbsyPusher.prototype.bind_all = function (callback) {
 	        this.global_emitter.bind_all(callback);
 	        return this;
 	    };
-	    Pusher.prototype.subscribeAll = function () {
+	    MbsyPusher.prototype.subscribeAll = function () {
 	        var channelName;
 	        for (channelName in this.channels.channels) {
 	            if (this.channels.channels.hasOwnProperty(channelName)) {
@@ -209,7 +209,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	        }
 	    };
-	    Pusher.prototype.subscribe = function (channel_name) {
+	    MbsyPusher.prototype.subscribe = function (channel_name) {
 	        var channel = this.channels.add(channel_name, this);
 	        if (channel.subscriptionPending && channel.subscriptionCancelled) {
 	            channel.reinstateSubscription();
@@ -219,7 +219,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	        return channel;
 	    };
-	    Pusher.prototype.unsubscribe = function (channel_name) {
+	    MbsyPusher.prototype.unsubscribe = function (channel_name) {
 	        var channel = this.channels.find(channel_name);
 	        if (channel && channel.subscriptionPending) {
 	            channel.cancelSubscription();
@@ -231,10 +231,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	        }
 	    };
-	    Pusher.prototype.send_event = function (event_name, data, channel) {
+	    MbsyPusher.prototype.send_event = function (event_name, data, channel) {
 	        return this.connection.send_event(event_name, data, channel);
 	    };
-	    Pusher.prototype.isEncrypted = function () {
+	    MbsyPusher.prototype.isEncrypted = function () {
 	        if (runtime_1["default"].getProtocol() === "https:") {
 	            return true;
 	        }
@@ -242,23 +242,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	            return Boolean(this.config.encrypted);
 	        }
 	    };
-	    Pusher.instances = [];
-	    Pusher.isReady = false;
-	    Pusher.logToConsole = false;
-	    Pusher.Runtime = runtime_1["default"];
-	    Pusher.ScriptReceivers = runtime_1["default"].ScriptReceivers;
-	    Pusher.DependenciesReceivers = runtime_1["default"].DependenciesReceivers;
-	    Pusher.auth_callbacks = runtime_1["default"].auth_callbacks;
-	    return Pusher;
+	    MbsyPusher.instances = [];
+	    MbsyPusher.isReady = false;
+	    MbsyPusher.logToConsole = false;
+	    MbsyPusher.Runtime = runtime_1["default"];
+	    MbsyPusher.ScriptReceivers = runtime_1["default"].ScriptReceivers;
+	    MbsyPusher.DependenciesReceivers = runtime_1["default"].DependenciesReceivers;
+	    MbsyPusher.auth_callbacks = runtime_1["default"].auth_callbacks;
+	    return MbsyPusher;
 	}());
 	exports.__esModule = true;
-	exports["default"] = Pusher;
+	exports["default"] = MbsyPusher;
 	function checkAppKey(key) {
 	    if (key === null || key === undefined) {
-	        throw "You must pass your app key when you instantiate Pusher.";
+	        throw "You must pass your app key when you instantiate MbsyPusher.";
 	    }
 	}
-	runtime_1["default"].setup(Pusher);
+	runtime_1["default"].setup(MbsyPusher);
 
 
 /***/ },
@@ -294,11 +294,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    getWebSocketAPI: function () {
 	        return window.WebSocket || window.MozWebSocket;
 	    },
-	    setup: function (PusherClass) {
+	    setup: function (MbsyPusherClass) {
 	        var _this = this;
-	        window.Pusher = PusherClass;
+	        window.MbsyPusher = MbsyPusherClass;
 	        var initializeOnDocumentBody = function () {
-	            _this.onDocumentBody(PusherClass.ready);
+	            _this.onDocumentBody(MbsyPusherClass.ready);
 	        };
 	        if (!window.JSON) {
 	            dependencies_1.Dependencies.load("json2", {}, initializeOnDocumentBody);
@@ -412,7 +412,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var script_receiver_factory_1 = __webpack_require__(4);
 	var defaults_1 = __webpack_require__(5);
 	var dependency_loader_1 = __webpack_require__(6);
-	exports.DependenciesReceivers = new script_receiver_factory_1.ScriptReceiverFactory("_pusher_dependencies", "Pusher.DependenciesReceivers");
+	exports.DependenciesReceivers = new script_receiver_factory_1.ScriptReceiverFactory("_pusher_dependencies", "MbsyPusher.DependenciesReceivers");
 	exports.Dependencies = new dependency_loader_1["default"]({
 	    cdn_http: defaults_1["default"].cdn_http,
 	    cdn_https: defaults_1["default"].cdn_https,
@@ -454,7 +454,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return ScriptReceiverFactory;
 	}());
 	exports.ScriptReceiverFactory = ScriptReceiverFactory;
-	exports.ScriptReceivers = new ScriptReceiverFactory("_pusher_script_", "Pusher.ScriptReceivers");
+	exports.ScriptReceivers = new ScriptReceiverFactory("_pusher_script_", "MbsyPusher.ScriptReceivers");
 
 
 /***/ },
@@ -658,7 +658,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	exports.extend = extend;
 	function stringify() {
-	    var m = ["Pusher"];
+	    var m = ["MbsyPusher"];
 	    for (var i = 0; i < arguments.length; i++) {
 	        if (typeof arguments[i] === "string") {
 	            m.push(arguments[i]);
@@ -1013,7 +1013,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    context.auth_callbacks[callbackName] = function (data) {
 	        callback(false, data);
 	    };
-	    var callback_name = "Pusher.auth_callbacks['" + callbackName + "']";
+	    var callback_name = "MbsyPusher.auth_callbacks['" + callbackName + "']";
 	    script.src = this.options.authEndpoint +
 	        '?callback=' +
 	        encodeURIComponent(callback_name) +
@@ -2809,7 +2809,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.getCloseError = function (closeEvent) {
 	    if (closeEvent.code !== 1000 && closeEvent.code !== 1001) {
 	        return {
-	            type: 'PusherError',
+	            type: 'MbsyPusherError',
 	            data: {
 	                code: closeEvent.code,
 	                message: closeEvent.reason || closeEvent.message
@@ -2889,7 +2889,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    logger_1["default"].debug('Event recd', message);
 	                    switch (message.event) {
 	                        case 'pusher:error':
-	                            _this.emit('error', { type: 'PusherError', data: message.data });
+	                            _this.emit('error', { type: 'MbsyPusherError', data: message.data });
 	                            break;
 	                        case 'pusher:ping':
 	                            _this.emit("ping");
